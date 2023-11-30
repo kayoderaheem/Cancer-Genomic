@@ -1,0 +1,34 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler,OneHotEncoder 
+
+rna_df = pd.read_csv("rna_seq_data.csv")
+prot_df = pd.read_csv("mass_spec_data.csv")
+
+filter_and_normalize(rna_df) 
+
+encode = OneHotEncoder()
+mhc_array = encode.fit_transform(mhc_types)
+
+.................................................
+MHC-binding affinity
+.................................................
+import NetMHCpan
+
+neoantigens = []
+for pep in tumor_peptides:
+   affinity = NetMHCpan.predict(peptide,patient_mhc)
+   if affinity < 500:
+      neoantigens.append((pep,affinity))
+
+.................................................
+Training ML Model for Immunogenicity
+.................................................
+X_train = np.array([rna_level, prot_level, stability, binding_score]) 
+y_train = np.array(observed_immunogenicity)
+
+model = RandomForestRegressor() 
+model.fit(X_train, y_train)
+
+for neoantigen in candidates:
+   immunogenicity = model.predict(neoantigen_features)
